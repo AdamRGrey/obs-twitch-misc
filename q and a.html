@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            let trivial = [
+                {q:"are mechanical keyboards the best?", a:"yes"},
+                {q:"should adam not type on his mechanical keyboard while the microphone is like 6cm away?", a:"yessiree"}
+            ];
+            let timeoutSeconds = 60;
+
+            let isOnQ = false;
+            let ccurrentpair = 0;
+            setTimeout(() => {next(); setInterval(next, timeoutSeconds * 100);}, 100);
+            function next(){
+                console.log(ccurrentpair);
+                
+                let box = document.querySelector("#prompt");
+                if(!isOnQ){
+                    isOnQ = true;
+                    ccurrentpair = Math.floor(Math.random() * trivial.length);
+                console.log(trivial[ccurrentpair]);
+                    box.innerHTML = trivial[ccurrentpair].q;
+                }
+                else{
+                    isOnQ = false;
+                    box.innerHTML = trivial[ccurrentpair].a;
+                }
+            }
+        </script>
+        <style type="text/css">
+            body{
+                margin: 0px;
+                padding: 0px;
+            }
+            #prompt{
+                width:100%;
+                height: 100%;
+                font-size: xx-large;
+                font-weight: bold;
+                text-align: center;
+                font-family: 'Times New Roman', Times, serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="prompt">
+            
+        </div>
+    </body>
+</html>
