@@ -5,24 +5,35 @@
                 {q:"are mechanical keyboards the best?", a:"yes"},
                 {q:"should adam not type on his mechanical keyboard while the microphone is like 6cm away?", a:"yessiree"}
             ];
-            let timeoutSeconds = 60;
+            let timeoutSeconds = 6;
 
+            let questionBox = null;
+            let answerBox = null;
             let isOnQ = false;
             let ccurrentpair = 0;
-            setTimeout(() => {next(); setInterval(next, timeoutSeconds * 100);}, 100);
+            setTimeout(initial, 100);
+            
+            function initial(){
+                questionBox = document.querySelector("#question");
+                answerBox = document.querySelector("#answer");
+                next();
+                setInterval(next, timeoutSeconds * 1000);
+            }
             function next(){
-                console.log(ccurrentpair);
                 
-                let box = document.querySelector("#prompt");
                 if(!isOnQ){
                     isOnQ = true;
                     ccurrentpair = Math.floor(Math.random() * trivial.length);
-                console.log(trivial[ccurrentpair]);
-                    box.innerHTML = trivial[ccurrentpair].q;
+                    console.log(trivial[ccurrentpair]);
+                    questionBox.className = "hidden";
+                    answerBox.className = "hidden";
+                    questionBox.innerHTML = trivial[ccurrentpair].q;
+                    answerBox.innerHTML = trivial[ccurrentpair].a;
+                    setTimeout(() => {questionBox.className="display-normal";}, 100);
                 }
                 else{
                     isOnQ = false;
-                    box.innerHTML = trivial[ccurrentpair].a;
+                    answerBox.className = "display-normal";
                 }
             }
         </script>
@@ -39,11 +50,16 @@
                 text-align: center;
                 font-family: 'Times New Roman', Times, serif;
             }
+            .hidden{
+                display:none;
+            }
+            
         </style>
     </head>
     <body>
         <div id="prompt">
-            
+            <div id="question" class="hidden"></div>
+            <div id="answer" class="hidden"></div>
         </div>
     </body>
 </html>
